@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Jquery -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+    <title>로그인!</title>
+</head>
+<body style="background: #FAFAFA">
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%">
+    <div style="padding: 20px ;text-align: center;border: solid 1px rgba(219, 219, 219, 1); width: 300px; height: 300px; margin-top: 30px; background: white">
+        <div style="padding-bottom: 10px"><img style="width: 150px"
+                                               src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
+        </div>
+        <div style="font-weight: bold; color: gray;padding-bottom: 20px"> 친구들의 사진과 동영상을 보려면 가입하세요.</div>
+        <div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" style="font-size: 14px; height: 24px" id="input_email" placeholder="name@example.com">
+                <label for="input_email" style="font-size: 14px;padding: 4px 10px">이메일 주소</label>
+            </div>
+        </div>
+        <div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" style="font-size: 14px; height: 24px" id="input_password"
+                       placeholder="name@example.com">
+                <label for="input_password" style="font-size: 14px;padding: 4px 10px">비밀번호</label>
+            </div>
+        </div>
+        <button id="login_button" class="btn btn-primary" style="width: 100%"> 로그인 </button>
+    </div>
+    <div style="padding: 20px ;text-align: center;border: solid 1px rgba(219, 219, 219, 1); width: 300px; height: 70px; margin-top: 30px; background: white">
+        <div> 계정이 없으신가요? <a href="/user/join">가입하기</a></div>
+    </div>
+</div>
+
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+<script>
+    $('#login_button').click(function () {
+
+        let email = $('#input_email').val();
+        let password = $('#input_password').val();
+
+        $.ajax({
+            url: "/user/login",
+            data: {
+                email : email,
+                password : password
+            },
+            method: "POST",
+            success: function (data) {
+                console.log("성공");
+                alert("로그인 성공");
+                location.replace('/main');
+
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+            complete: function () {
+                console.log("완료");
+            }
+        });
+    });
+</script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
